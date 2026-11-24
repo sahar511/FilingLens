@@ -1,0 +1,47 @@
+[project]
+name = "filinglens"
+version = "0.1.0"
+description = "AI research assistant for SEC filings"
+requires-python = ">=3.11"
+dependencies = [
+    "anthropic>=0.40",
+    "httpx>=0.27",
+    "fastembed>=0.7",
+    "numpy>=1.26",
+    "pydantic>=2.7",
+    "pgvector>=0.3",
+    "pydantic-settings>=2.3",
+    "sqlalchemy>=2.0",
+    "psycopg[binary]>=3.1",
+    "tenacity>=8.3",
+    "beautifulsoup4>=4.12",
+    "lxml>=5.0",
+    "typer>=0.12",
+    "rich>=13.7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6", "pre-commit>=3.7"]
+
+[project.scripts]
+filinglens = "filinglens.cli.main:app"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["filinglens*"]
+
+[tool.setuptools.package-data]
+"filinglens.core.prompts" = ["*.md"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
